@@ -38,7 +38,7 @@ const getToken = async(req,res) => {
     
         res.json({ success: true, accessToken: userToken.access_token });
       } catch (error) {
-        logger.error(`Error in get token: ${err.message}`);
+        logger.error(`Error in get token: ${error.message}`);
         res.status(500).json({ success: false, message: 'Error getting access token', error });
       }
 }
@@ -61,7 +61,7 @@ const oauth2callback = async(req,res) => {
       await tokenDocument.save();
       res.redirect(`https://calendar-hazel-two-67.vercel.app/dashboard`); 
     } catch (error) {
-      logger.error(`Error in token redirect uri: ${err.message}`);
+      logger.error(`Error in token redirect uri: ${error.message}`);
       res.status(500).send('Error during authentication');
     }
 }
@@ -96,7 +96,7 @@ const getGoogleEvents = async(req,res) => {
         const events = response.data.items;
         res.json({ events });
       } catch (error) {
-        logger.error(`Error in getting goggle events: ${err.message}`);
+        logger.error(`Error in getting goggle events: ${error.message}`);
         res.status(500).send('Error fetching events');
       }
 }

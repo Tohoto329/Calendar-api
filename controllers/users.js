@@ -81,7 +81,7 @@ const search = async (req, res) => {
         res.json({ userData });
 
     } catch (error) {
-        logger.error(`Error in search: ${err.message}`);
+        logger.error(`Error in search: ${error.message}`);
         res.status(500).json({ error: 'Server error' });
     }
 };
