@@ -1,13 +1,13 @@
-require('dotenv').config();
-require('./config/mongo');
 const express = require('express');
 const cors = require('cors');
-const route = require('./route');
+const route = require('./route'); 
 const logger = require('./config/logger');
+require('dotenv').config();
+require('./config/mongo');
 
 const app = express();
 
-const allowedOrigin = process.env.ALLOW_ORIGIN; 
+const allowedOrigin = process.env.ALLOW_ORIGIN;
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -28,9 +28,8 @@ app.use(route);
 
 const errorHandler = (err, req, res, next) => {
   logger.error(`Unhandled error: ${err.message}`);
-
   res.status(500).json({
-      error: 'Something went wrong, please try again later.'
+    error: 'Something went wrong, please try again later.'
   });
 };
 
