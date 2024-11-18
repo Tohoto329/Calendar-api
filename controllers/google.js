@@ -59,7 +59,7 @@ const oauth2callback = async(req,res) => {
         });
   
       await tokenDocument.save();
-      res.redirect(`https://calendar-hazel-two-67.vercel.app/dashboard`); 
+      res.redirect(process.env.GOOGLE_REDIRECTION); 
     } catch (error) {
       logger.error(`Error in token redirect uri: ${error.message}`);
       res.status(500).send('Error during authentication');
