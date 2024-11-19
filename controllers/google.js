@@ -84,6 +84,14 @@ const getGoogleEvents = async(req,res) => {
         });
     
         const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
+
+        if (token.expiry_date <= Date.now()) {
+          oauth2Client.setCredentials({
+              refresh_token: token.refresh_token,
+          });
+          const { credentials } = await oauth2Client.refreshAccessToken();
+          oauth2Client.setCredentials(credentials);
+      }
     
         const response = await calendar.events.list({
           calendarId: 'primary',
@@ -96,7 +104,7 @@ const getGoogleEvents = async(req,res) => {
         const events = response.data.items;
         res.json({ events });
       } catch (error) {
-        logger.error(`Error in getting goggle events: ${error.message}`);
+        console.error(`Error in getting goggle events: ${error}`);
         res.status(500).send('Error fetching events');
       }
 }

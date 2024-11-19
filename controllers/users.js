@@ -10,7 +10,7 @@ const login = async(req, res) =>{
     try{
         const user = await UserModel.findOne({email});
         if(!user){
-            return res.status(404).json({message:'Email not found'})
+            return res.status(200).json({status:false,message:'Email not found'})
         }
 
         const passwordMatch = await bcrpyt.compare(password, user.password);
@@ -27,7 +27,7 @@ const login = async(req, res) =>{
             );
             res.status(200).json({status:true,token,googleSync:googleSyncStatus});
         }else{
-            res.status(401).json({message:'Incorrect Password'})
+            res.status(200).json({status:false,message:'Incorrect Password'})
         }
     }catch(err){
         logger.error(`Error in checkUser: ${err.message}`);
