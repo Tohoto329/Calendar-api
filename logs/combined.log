@@ -1,0 +1,3 @@
+error: Error in checkUser: getaddrinfo ENOTFOUND ac-qnqztmt-shard-00-01.dyg4fls.mongodb.net {"timestamp":"2024-11-20T17:01:37.640Z"}
+error: Error in add events: invalid_request {"timestamp":"2024-11-20T17:17:10.525Z"}
+error: Error in add events: invalid_request {"timestamp":"2024-11-20T17:18:12.416Z"}
